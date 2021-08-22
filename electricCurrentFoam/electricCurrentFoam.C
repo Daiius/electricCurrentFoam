@@ -46,8 +46,8 @@ int main(int argc, char *argv[])
 	);
 
 	#include "addCheckCaseOptions.H"
-    #include "setRootCaseLists.H"
-    #include "createTime.H"
+	#include "setRootCaseLists.H"
+	#include "createTime.H"
 	#include "createMesh.H"
 	#include "createFields.H"
 
@@ -61,13 +61,13 @@ int main(int argc, char *argv[])
 		Info<< "Iteration = " << runTime.timeName() << nl << endl;
 		
 		solve( fvm::laplacian(sigma, voltage) );
-		//current = - sigma * fvc::grad(voltage);
+		
 		current = fvc::reconstruct(
 			- fvc::interpolate(sigma) * fvc::snGrad(voltage) * mesh.magSf()
 		);
 
 		runTime.write();
-    	runTime.printExecutionTime(Info);
+		runTime.printExecutionTime(Info);
 	}
 
     Info<< "End\n" << endl;
