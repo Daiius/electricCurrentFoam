@@ -1,0 +1,27 @@
+FoamFile
+{
+	version	2.0;
+	format	ascii;
+	class dictionary;
+	object meshDict;
+}
+
+surfaceFile	"test.fms";
+
+minCellSize	1.0;
+maxCellSize	1.0;
+boundaryCellSize	1.0;
+
+anisotropicSources
+{
+	thinRegion
+	{
+		type box;
+		centre (0 0 10);
+		lengthX 50;
+		lengthY 50;
+		lengthZ 4;
+
+		scaleZ 0.2;
+	}
+}

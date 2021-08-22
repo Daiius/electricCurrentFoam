@@ -1,0 +1,13 @@
+#!/bin/bash
+
+surfaceFeatureEdges -angle 45 test.stl test.fms
+cartesianMesh
+scaleMesh 1e-3
+
+rm -r 0
+cp -r 0.orig 0
+
+setFields
+
+electricCurrentFoam
+
