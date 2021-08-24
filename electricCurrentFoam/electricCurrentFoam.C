@@ -72,6 +72,37 @@ int main(int argc, char *argv[])
 
     Info<< "End\n" << endl;
 
+	// Boundary condition tests
+	auto bf = current.boundaryField();
+	auto wlist = bf.types();
+	Info<< wlist << endl;
+	forAll(wlist, wlistI)
+	{
+		Info<< wlist[wlistI] << endl;
+		if (wlist[wlistI] == "fixedValue")
+		{
+			Info<< "Current condition found!" << endl;
+			const fvPatch &patch = current.boundaryField()[wlistI].patch();
+			auto boundaryCurrent = patch.lookupPatchField<volVectorField,vector>("current");
+			auto internalCurrent = current.internalField()[wlistI];
+			forAll(patch.faceCells(), pcid)
+			{
+				label cid = patch.faceCells()[pcid];
+				const cell &c = mesh.cells()[cid];
+
+				Info<< c << "," << current[cid] << endl;
+				
+			}
+
+			//forAll(boundaryCurrent, bci)
+			//{
+			//	Info<< bci << "," << boundaryCurrent[bci] << endl;
+			//	Info<< internalCurrent[bci] << endl;
+			//}
+		}
+	}
+	//
+
     return 0;
 }
 
